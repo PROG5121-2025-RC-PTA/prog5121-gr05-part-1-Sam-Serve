@@ -1,0 +1,99 @@
+package loginandsignup;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+
+public class LoginAndSignUp 
+{
+
+    
+    public static void main(String[] args) 
+    {
+      Login LoginFrame = new Login();
+      LoginFrame.setVisible(true);
+      LoginFrame.pack();
+      LoginFrame.setLocationRelativeTo(null); 
+      
+      Scanner input = new Scanner(System.in);
+      
+        System.out.println("Please Enter Your Username: ");
+        String usrNaam = input.nextLine();
+        
+        System.out.println("Please Enter Cellphone Number: ");
+        String Cellphone = input.nextLine();
+        
+        System.out.println("Please Enter Password: ");
+        String passcode = input.nextLine();
+        String pass = null;
+        chLogin(usrNaam);
+    }
+
+    private static void chLogin(String usrNaam) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public Component rootPane;
+    
+    public void chLogin(String userNaam, String passcode)
+    {
+        String usrNaam = null;
+    if(!isValidUsername(usrNaam))
+    {
+            Component rootPane = null;
+    JOptionPane.showMessageDialog(rootPane, "Username incorrect. ");
+    }
+    else if(!isValidPassword(passcode))
+    {
+            Component rootPane = null;
+    JOptionPane.showMessageDialog(rootPane, "Password incorrect");
+    }
+    else
+    {
+    
+    JOptionPane.showMessageDialog(rootPane, "Login Successful");
+    
+    }
+    
+    }
+    
+    public boolean isValidCellNumber(String cellNumber)
+    {
+    String cleaned = cellNumber.replaceAll("\\s+", "");
+    if(!cleaned.startsWith("+27") || cleaned.length() !=12)
+    {
+    return false;
+    }
+    String lclNum = cleaned.substring(3);
+    
+    if(!lclNum.matches("\\d(9)"))
+    {
+    return false;
+    }
+    
+    char firstDigit = lclNum.charAt(0);
+    return firstDigit == '6' || firstDigit == '7' || firstDigit == '8';
+    
+    }
+    public boolean isValidPassword(String passcode)
+    {
+    if(passcode.length() <8)
+    {
+    return false;
+    }
+    var upperCase = ",*[A-Z].*";
+    String nums = ".*[0-9].*";
+    String spChar = ".*[!@#$%^&*():;,<>/].*";
+    
+    boolean hasupperCase = Pattern.matches(upperCase, passcode);
+    boolean hasnums = Pattern.matches(nums, passcode);
+    boolean hasspChar = Pattern.matches(spChar,passcode);
+    return hasupperCase && hasnums && hasspChar;
+            
+    }
+    public boolean isValidUsername(String usrNaam)
+    {
+    return usrNaam .length() == 5 && usrNaam.contains("_");
+    }    
+   
+    
+}
